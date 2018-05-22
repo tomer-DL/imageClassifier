@@ -1,4 +1,4 @@
-##Face classifier using open CV and deep learning
+## Face classifier using open CV and deep learning
 
 This is an educational project aimed at studying face recognition.
 
