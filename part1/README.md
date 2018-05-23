@@ -16,4 +16,4 @@ This part includes the following files:
   * output.faces.dir - the directory to save the face images
   * faces.extension=.jpg  - the file format to save the face images to
 * read_ini.py - A utility code to read an ini file to a dictionary
-* 
+* **file-generator.py** - This is the program to run. It reads recursively all the images from the *input.images.root* directory, extract the faces, resizes them to *face.min.sizeXface.min.size*, and saves them to the *output.faces.dir* directory.
