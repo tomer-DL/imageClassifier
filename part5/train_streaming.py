@@ -7,12 +7,13 @@ from keras.layers import Conv2D, MaxPooling2D
 from keras.utils import np_utils
 from keras import backend as K
 from read_ini import read_section
-
+from keras.optimizers import Adam
 properties = read_section("part5.ini", "part5")
 
 dirs = [properties["real.faces.dir"], properties["not.real.faces.dir"]]
 classes = [1, 0]
 dataset = sd.StreamingDataset(dirs, classes)
+dataset.generate_training(20)
 
 model_dir = properties["model.save.dir"]
 model_file = properties["model.save.name"]
@@ -49,19 +50,19 @@ model.add(Dense(32, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(1, activation='sigmoid'))
 
+adam = Adam(lr=0.0005)
 model.compile(loss='mean_squared_error',
-              optimizer='rmsprop',
+              optimizer=adam,
               metrics=['accuracy'])
 model.summary()
  
 # 9. Fit model on training data
 history = model.fit_generator(dataset.generate_training(32), steps_per_epoch=242, epochs=15, \
-                verbose=1, validation_data=dataset.generate_test(32), validation_steps=60)
+                verbose=2, validation_data=dataset.generate_test(32), validation_steps=60)
 
 print(history.history) 
 # 10. Evaluate model on test data
 model.save(model_dir + model_file)
-print(score)
 
 import matplotlib.pyplot as plt
 acc = history.history['acc']

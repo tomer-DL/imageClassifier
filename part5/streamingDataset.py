@@ -35,10 +35,12 @@ class StreamingDataset:
             ar = np.zeros((batch_size, 150, 150, 3))
             a = 0
             for file_name in file_names:
+                #print(file_name, str(y[a]))
                 img = cv2.imread(file_name)
                 ar[a,:,:,:] = img
                 a += 1
-
+            ar = ar.astype('float32')
+            ar /= 255
             yield ar, y
                       
     def generate_test(self, batch_size):
@@ -53,7 +55,8 @@ class StreamingDataset:
                 img = cv2.imread(file_name)
                 ar[a,:,:,:] = img
                 a += 1
-
+            ar = ar.astype('float32')
+            ar /= 255
             yield ar, y
             
 
