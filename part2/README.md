@@ -10,7 +10,7 @@ In the next part we'll train and then sort the remaining files.
 For this part, you should take 200 genuine face images and put them in one directory.
 then take 200 non face images and put them in another directory.
 
-### set the properties (or leave them with default values):
+### set the properties in part2.ini (or leave them with default values):
 * input.images.faces= The faces images directory
 * input.images.other= The non faces images directory
 * images.extension= The faces images extension (i.e. .jpg)
