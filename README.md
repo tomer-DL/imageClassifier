@@ -15,8 +15,6 @@ I am using Haar Cascade to recognize faces inside images, and extract those face
 * In the **3rd part**, since the Haar Cascade isn't totally accurate, I am training a deep neural network to distinguish
 between true face images and false face images.
 
-* In the **4th part** I am using the deep neural network created in the third part to weed out the non-face images from our dataset.
+* In the **4th part** I am using the deep neural network created in the third part to sort the rest of the faces dataset. The sort would not be perfect, but it eases a lot the manual sort.
 
-* For the **5th part** I prepared a few directories, each with images of a different person. After that I am training a neural network to identify each person.
-
-* In the **6th part** I am using the neural network created in the fifth part to sort the rest of the images.
+* For the **5th part** After manually sorting all the dataset, I am training a deep neural network on the full sorted dataset. Since the dataset is too big to hold in the memory, unlike the one created in the 2nd part, I am using a generator to create the dataset as I am training it.
