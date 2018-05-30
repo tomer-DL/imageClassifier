@@ -57,7 +57,7 @@ model.compile(loss='mean_squared_error',
 model.summary()
  
 # 9. Fit model on training data
-history = model.fit_generator(train_generator, steps_per_epoch=24, epochs=100, 
+history = model.fit_generator(train_generator, steps_per_epoch=24, epochs=20, 
                 verbose=2, validation_data=validation_generator, validation_steps=6)
 
 print(history.history) 
