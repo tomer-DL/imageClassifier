@@ -16,6 +16,7 @@ validation_root = properties["validation.dir.root"]
 
 model_dir = properties["model.save.dir"]
 model_file = properties["model.save.name"]
+classes = eval(properties["img.classes"]) 
 
 datagen = ImagedataGenerator(rescale=1./255)
 
@@ -26,6 +27,7 @@ train_generator = tdatagen.flow_from_directory(
     batch_size=32,
     class_mode="categorical",
     shuffle=True,
+    classes=classes
 )
 
 validation_generator = datagen.flow_from_directory(
@@ -33,7 +35,8 @@ validation_generator = datagen.flow_from_directory(
     target_size=(150, 150),
     color_mode="rgb"
     batch_size=32,
-    class_mode="categorical"
+    class_mode="categorical",
+    classes=classes
 }
 
 model = Sequential()
