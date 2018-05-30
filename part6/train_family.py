@@ -51,7 +51,7 @@ model.add(Dense(32, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(1, activation='sigmoid'))
 
-model.compile(loss='mean_squared_error',
+model.compile(loss='categorical_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
 model.summary()
