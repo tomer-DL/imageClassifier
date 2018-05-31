@@ -18,12 +18,12 @@ model_dir = properties["model.save.dir"]
 model_file = properties["model.save.name"]
 classes = eval(properties["img.classes"]) 
 
-datagen = ImagedataGenerator(rescale=1./255)
+datagen = ImageDataGenerator(rescale=1./255)
 
-train_generator = tdatagen.flow_from_directory(
+train_generator = datagen.flow_from_directory(
     directory=training_root,
     target_size=(150, 150),
-    color_mode="rgb"
+    color_mode="rgb",
     batch_size=32,
     class_mode="categorical",
     shuffle=True,
@@ -33,11 +33,11 @@ train_generator = tdatagen.flow_from_directory(
 validation_generator = datagen.flow_from_directory(
     directory=validation_root,
     target_size=(150, 150),
-    color_mode="rgb"
+    color_mode="rgb",
     batch_size=32,
     class_mode="categorical",
     classes=classes
-}
+)
 
 model = Sequential()
 model.add(Conv2D(32, 3, 3, activation='relu', input_shape=(150,150,3)))
@@ -52,7 +52,7 @@ model.add(Dense(128, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(32, activation='relu'))
 model.add(Dropout(0.5))
-model.add(Dense(1, activation='sigmoid'))
+model.add(Dense(len(classes), activation='sigmoid'))
 
 model.compile(loss='categorical_crossentropy',
               optimizer='adam',
@@ -60,7 +60,7 @@ model.compile(loss='categorical_crossentropy',
 model.summary()
  
 # 9. Fit model on training data
-history = model.fit_generator(train_generator, steps_per_epoch=24, epochs=20, 
+history = model.fit_generator(train_generator, steps_per_epoch=24, epochs=40, 
                 verbose=2, validation_data=validation_generator, validation_steps=6)
 
 print(history.history) 
