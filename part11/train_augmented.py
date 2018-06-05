@@ -17,8 +17,9 @@ train_images = int(properties["train.images.count"])
 valid_images = int(properties["validation.images.count"])
 train_batch_size = int(properties["train.batch.size"])
 valid_batch_size = int(properties["validation.batch.size"])
-dataset_dir = properties["dataset.dir"]
 classes = eval(properties["img.classes"])
+model_dir = properties["model.save.dir"]
+model_file = properties["model.save.name"]
 
 def main():
     model = Sequential()
@@ -38,20 +39,20 @@ def main():
     datagen_validation = ImageDataGenerator(rescale=1./255)
 
     train_generator = datagen_train.flow_from_directory(
-        directory=training_root,
+        directory=train_dir,
         target_size=(150, 150),
         color_mode="rgb",
-        batch_size=32,
+        batch_size=train_batch_size,
         class_mode="categorical",
         shuffle=True,
         classes=classes
     )
 
     validation_generator = datagen_validation.flow_from_directory(
-        directory=validation_root,
+        directory=valid_dir,
         target_size=(150, 150),
         color_mode="rgb",
-        batch_size=32,
+        batch_size=valid_batch_size,
         class_mode="categorical",
         classes=classes
     )
@@ -81,3 +82,7 @@ def main():
     plt.title('Training and validation loss')
     plt.legend()
     plt.show()
+    
+if __name__ == "__main__":
+    main()
+
