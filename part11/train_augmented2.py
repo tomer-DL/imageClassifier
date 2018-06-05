@@ -8,7 +8,7 @@ from read_ini import read_section
 import matplotlib.pyplot as plt
 
 base_model = VGG16(include_top=False, input_shape=(150,150,3))
-base_model.trainable = False
+base_model.summary()
 
 properties = read_section("part11.ini", "part11")
 train_dir = properties["train_dir"]
@@ -26,6 +26,15 @@ def main():
     model.add(Dense(256, activation='relu'))
     model.add(Dropout(0.5))
     model.add(Dense(len(classes), activation="softmax"))
+
+    trainable = False
+    for layer in base_model.layers:
+        if layer.name == 'block5_conv3':
+            trainable = True
+        else:
+            trainable = False
+        layer.trainable = trainable
+
 
     datagen_train = ImageDataGenerator(rescale=1./255,
         rotation_range=6,
@@ -60,7 +69,7 @@ def main():
               metrics=['accuracy'])
     model.summary()
      
-    history = model.fit_generator(train_generator, steps_per_epoch=24, epochs=50, 
+    history = model.fit_generator(train_generator, steps_per_epoch=24, epochs=20, 
                     verbose=2, validation_data=validation_generator, validation_steps=6)
 
     model.save(model_dir + model_file)
@@ -83,4 +92,5 @@ def main():
     
 if __name__ == "__main__":
     main()
+
 
