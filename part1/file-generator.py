@@ -1,22 +1,14 @@
 import os
 import cv2
 import numpy as np
-from read_ini import read_section
-
-
-
-def file_generator(root, ext=""):
-    for x in os.listdir(root):
-        if os.path.isfile(root + "\\" + x) and x.endswith(ext):
-            yield root + "\\" + x
-        elif os.path.isdir(root + "\\" + x):
-            yield from file_generator(root + "\\" + x, ext)
+from util import read_section
+from util import file_generator
 
 def main():
     properties = read_section("part1.ini", "part1")
     face_cascade = cv2.CascadeClassifier(properties["face.classifier"])        
     a=1
-    for filename in file_generator(properties["input.images.root"], properties["images.extension"]):
+    for filename in file_generator(properties["input.images.root"], properties["images.extension"], True):
         try:
             img = cv2.imread(filename)
             fx = float(properties["factor.x"])
