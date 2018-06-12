@@ -1,8 +1,8 @@
 import numpy as np
 import os
 import cv2
-from read_ini import read_section
-
+from utils import read_section
+from utils import file_generator
 
 properties = read_section("part2.ini", "part2")
 faces_dir = properties["input.images.faces"]
@@ -13,11 +13,6 @@ image_width = int(properties["face.size.width"])
 output_dir = properties["output.dataset.dir"]
 output_X = output_dir + properties["dataset.file.name.x"]
 output_y = output_dir + properties["dataset.file.name.y"]
-
-def file_generator(root, ext=""):
-    for x in os.listdir(root):
-        if os.path.isfile(root + "/" + x) and x.endswith(ext):
-            yield root + "/" + x
 
 def read_dir(ar, y, dir, cur_class):
     a = 0
