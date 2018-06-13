@@ -6,14 +6,13 @@ from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 from keras.utils import np_utils
 from keras import backend as K
-from read_ini import read_section
+from utils import read_section
 from keras.optimizers import Adam
 properties = read_section("part5.ini", "part5")
 
 dirs = [properties["real.faces.dir"], properties["not.real.faces.dir"]]
 classes = [1, 0]
 dataset = sd.StreamingDataset(dirs, classes)
-dataset.generate_training(20)
 
 model_dir = properties["model.save.dir"]
 model_file = properties["model.save.name"]
