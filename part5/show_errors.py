@@ -1,9 +1,9 @@
 import numpy as np
 from keras.models import load_model
 import cv2
-from file_util import file_generator
+from utils import file_generator
 import os
-from read_ini import read_section
+from utils import read_section
 
 properties = read_section("part5.ini", "part5")
 model_dir = properties["model.save.dir"]
