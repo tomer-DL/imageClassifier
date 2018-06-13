@@ -7,7 +7,7 @@ from keras.layers import Conv2D, MaxPooling2D
 from keras.utils import np_utils
 from keras import backend as K
 from read_dataset import load_data
-from read_ini import read_section
+from utils import read_section
 
 properties = read_section("part3.ini", "part3")
 model_dir = properties["model.save.dir"]
