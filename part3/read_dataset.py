@@ -1,7 +1,7 @@
 import numpy as np
 import os
 import cv2
-from read_ini import read_section
+from utils import read_section
 
 
 properties = read_section("part3.ini", "part3")
@@ -21,10 +21,3 @@ def load_data():
     training_y, test_y = y[training_idx], y[test_idx]
     return (training_X, test_X), (training_y, test_y)
     
-    
-def file_generator(root, ext=""):
-    for x in os.listdir(root):
-        if os.path.isfile(root + "/" + x) and x.endswith(ext):
-            yield root + "/" + x
-
-
