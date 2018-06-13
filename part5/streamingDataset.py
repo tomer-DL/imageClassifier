@@ -1,4 +1,4 @@
-from file_util import file_generator
+from utils import file_generator
 import numpy as np
 import cv2
 
